@@ -1,0 +1,29 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.mine_diver.aethermainmenu.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "DisconnectMixinLevel",
+    "cancel.MixinMonster",
+    "cancel.MixinPlayerBase"
+  ],
+  "server": [
+  ],
+  "client": [
+    "AccessorSoundHelper",
+    "ButtonAccessor",
+    "CustomButtonMixinMainMenu",
+    "DeleteLoadedWorldMixinSelectWorld",
+    "MixinMainMenu",
+    "MixinMinecraft",
+    "MixinScreenBase",
+    "MixinSoundHelper",
+    "cancel.Mixinclass_556",
+    "cancel.MixinHud",
+    "cancel.MixinPlayerRenderer"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

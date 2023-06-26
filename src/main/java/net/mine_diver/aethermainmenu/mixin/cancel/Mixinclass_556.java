@@ -1,6 +1,6 @@
-package net.mine_diver.dynamicmainmenu.mixin;
+package net.mine_diver.aethermainmenu.mixin.cancel;
 
-import net.mine_diver.dynamicmainmenu.DynamicMainMenu;
+import net.mine_diver.aethermainmenu.AetherMenu;
 import net.minecraft.class_556;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,7 +12,8 @@ public class Mixinclass_556 {
 
     @Inject(method = "method_1860(F)V", at = @At("HEAD"), cancellable = true)
     private void cancelHand(float f, CallbackInfo ci) {
-        if (DynamicMainMenu.musicId != null)
+
+        if (AetherMenu.musicId != null)
             ci.cancel();
     }
 }

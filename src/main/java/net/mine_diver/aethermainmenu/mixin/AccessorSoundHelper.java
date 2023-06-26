@@ -1,4 +1,4 @@
-package net.mine_diver.dynamicmainmenu.mixin;
+package net.mine_diver.aethermainmenu.mixin;
 
 import net.minecraft.client.sound.SoundHelper;
 import org.spongepowered.asm.mixin.Mixin;

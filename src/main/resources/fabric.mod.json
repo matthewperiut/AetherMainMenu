@@ -1,11 +1,12 @@
 {
   "schemaVersion": 1,
-  "id": "dynamicmainmenu",
+  "id": "aethermainmenu",
   "version": "${version}",
 
-  "name": "Dynamic Main Menu",
-  "description": "Makes your main menu fancy! Music: https://youtu.be/PhuybmgfTgU",
+  "name": "Aether Main Menu",
+  "description": "Replicates Aether 1.02's Main Menu, based off mine_diver's Dynamic Menu Mod",
   "authors": [
+    "matthewperiut",
     "mine_diver"
   ],
   "contact": {
@@ -15,20 +16,20 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/dynamicmainmenu/icon.png",
+  "icon": "assets/aethermainmenu/icon.png",
 
   "environment": "client",
   "entrypoints": {
     "stationapi:event_bus": [
-      "net.mine_diver.dynamicmainmenu.DynamicMainMenu"
+      "net.mine_diver.aethermainmenu.AetherMenu"
     ]
   },
   "mixins": [
-    "dynamicmainmenu.mixins.json"
+    "aethermainmenu.mixins.json"
   ],
 
   "depends": {
     "minecraft": "1.0.0-beta.7.3",
-    "stationapi": ">=2.0-PRE2"
+    "stationapi": "*"
   }
 }
