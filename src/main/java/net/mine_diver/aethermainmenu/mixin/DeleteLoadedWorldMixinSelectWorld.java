@@ -2,10 +2,8 @@ package net.mine_diver.aethermainmenu.mixin;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.mine_diver.aethermainmenu.AetherMenu;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.ScreenBase;
 import net.minecraft.client.gui.screen.menu.DeleteConfirmation;
-import net.minecraft.client.gui.screen.menu.SelectWorld;
 import net.minecraft.client.gui.widgets.Button;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -36,8 +34,7 @@ public class DeleteLoadedWorldMixinSelectWorld extends ScreenBase {
                 }
             }
             AetherMenu.lastLevel = null;
-            AetherMenu.shouldWorldLoad = false;
-            AetherMenu.visibleWorldButton = false;
+            AetherMenu.LoadWorld(minecraft);
         }
     }
 }

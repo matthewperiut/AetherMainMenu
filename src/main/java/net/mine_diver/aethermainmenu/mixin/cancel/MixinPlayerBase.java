@@ -43,14 +43,4 @@ public class MixinPlayerBase extends Living {
         if (AetherMenu.musicId != null)
             ci.cancel();
     }
-
-/*
-    @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
-    public void tick(CallbackInfo ci)
-    {
-        if (AetherMenu.musicId != null)
-        {
-            ci.cancel();
-        }
-    }*/
 }

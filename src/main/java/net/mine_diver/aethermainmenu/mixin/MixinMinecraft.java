@@ -28,20 +28,12 @@ public class MixinMinecraft {
 
     @Shadow public Level level;
 
-    @Shadow
-    private static Minecraft instance;
-
-    PlayerBase savedPlayer;
-
     @Inject(method = "openScreen(Lnet/minecraft/client/gui/screen/ScreenBase;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;lockCursor()V", shift = At.Shift.BEFORE))
     private void stopMusic(ScreenBase screen, CallbackInfo ci) {
         if (AetherMenu.musicId != null) {
             AccessorSoundHelper.getSoundSystem().stop(AetherMenu.musicId);
             AetherMenu.musicId = null;
             AetherMenu.needsPlayerCreation = false;
-            //viewEntity = savedPlayer;
-            //level.spawnEntity(savedPlayer);
-
         }
     }
 
@@ -74,9 +66,7 @@ public class MixinMinecraft {
                     viewEntity.height = 0;
                     level.spawnEntity(viewEntity);
 
-                    savedPlayer = (PlayerBase) player;
-
-                    viewEntity.setPosition(savedPlayer.x, savedPlayer.y, savedPlayer.z);
+                    viewEntity.setPosition(player.x, player.y, player.z);
                     AetherMenu.needsPlayerCreation = false;
                 }
 
@@ -112,16 +102,13 @@ public class MixinMinecraft {
                         {
                             position = hitResult.field_1988;
                             // prevent clipping walls
-                            position.x += d0/20.f;
-                            position.y += d1/20.f;
-                            position.z += d2/20.f;
+                            position.x += d0/10.f;
+                            position.y += d1/10.f;
+                            position.z += d2/10.f;
                         }
                     }
 
-
-
                     viewEntity.setPosition(position.x, position.y, position.z);
-                    //viewEntity.setPositionAndAngles(viewEntity.x, 128, viewEntity.z, 180, 30);
                     viewEntity.setVelocity(0,0,0);
                 }
             }

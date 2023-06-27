@@ -35,15 +35,15 @@ public class AetherButton extends Button
             initialize = false;
         }
 
-        if (minecraft.level == null & !AetherMenu.replaceBgTile)
+        this.x = ogx;
+        this.y = ogy;
+        this.width = ogw;
+        if (!AetherMenu.replaceBgTile)
         {
             super.render(minecraft, i, j);
             return;
         }
-
-        this.x = ogx;
-        this.y = ogy;
-        this.width = ogw;
+        else
         if (minecraft.level != null)
         {
             this.x = 5;
@@ -74,12 +74,7 @@ public class AetherButton extends Button
 
         if (this.visible) {
             TextRenderer var4 = minecraft.textRenderer;
-            if (AetherMenu.replaceBgTile) {
-                GL11.glBindTexture(3553, minecraft.textureManager.getTextureId("aethermainmenu:textures/gui/buttons.png"));
-            }
-            else {
-                GL11.glBindTexture(3553, minecraft.textureManager.getTextureId("/gui/gui.png"));
-            }
+            GL11.glBindTexture(3553, minecraft.textureManager.getTextureId("aethermainmenu:textures/gui/buttons.png"));
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             boolean var5 = i >= this.x && j >= this.y && i < this.x + this.width && j < this.y + this.height;
             int var6 = this.getYImage(var5);
