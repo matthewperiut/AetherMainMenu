@@ -60,8 +60,19 @@ public class AetherMenu {
 
         modular = of(MODID, "mainmenu.aether");
 
+        CreateConfigFolder();
         AttemptLoadingSettings();
         AttemptLoadingLastLevel();
+    }
+
+    private static void CreateConfigFolder()
+    {
+        String filePath = FabricLoader.getInstance().getConfigDir().toString() + "/aether/";
+        File folder = new File(filePath);
+
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
     }
 
     public static void SaveCurrentSettings()
@@ -90,7 +101,7 @@ public class AetherMenu {
         }
     }
 
-    public static void AttemptLoadingSettings()
+    private static void AttemptLoadingSettings()
     {
         String filePath = FabricLoader.getInstance().getConfigDir().toString() + "/aether/settings.txt";
         File file = new File(filePath);
