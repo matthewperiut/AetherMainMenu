@@ -1,6 +1,6 @@
-package net.mine_diver.aethermainmenu.mixin.cancel;
+package com.periut.aethermainmenu.mixin.cancel;
 
-import net.mine_diver.aethermainmenu.AetherMenu;
+import com.periut.aethermainmenu.AetherMenu;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.ScreenScaler;
 import org.spongepowered.asm.mixin.Mixin;

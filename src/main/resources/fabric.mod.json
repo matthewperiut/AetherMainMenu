@@ -6,22 +6,21 @@
   "name": "Aether Main Menu",
   "description": "Replicates Aether 1.02's Main Menu, based off mine_diver's Dynamic Menu Mod",
   "authors": [
-    "matthewperiut",
+    "telvarost",
+    "slainlight",
     "mine_diver"
   ],
   "contact": {
-    "homepage": "https://glass-repo.net/repo/mod/dynamicmainmenu",
-    "issues": "https://github.com/mineLdiver/DynamicMainMenu/issues",
-    "discord": "mine_diver#0618"
+    "issues": "https://github.com/matthewperiut/aethermainmenu/issues"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/aethermainmenu/icon.png",
 
   "environment": "client",
   "entrypoints": {
     "stationapi:event_bus": [
-      "net.mine_diver.aethermainmenu.AetherMenu"
+      "com.periut.aethermainmenu.AetherMenu"
     ]
   },
   "mixins": [

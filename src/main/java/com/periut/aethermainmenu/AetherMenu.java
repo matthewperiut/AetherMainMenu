@@ -1,4 +1,4 @@
-package net.mine_diver.aethermainmenu;
+package com.periut.aethermainmenu;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.mine_diver.unsafeevents.listener.EventListener;

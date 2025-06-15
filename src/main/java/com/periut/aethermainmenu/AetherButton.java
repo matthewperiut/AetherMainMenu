@@ -1,4 +1,4 @@
-package net.mine_diver.aethermainmenu;
+package com.periut.aethermainmenu;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.font.TextRenderer;

@@ -1,7 +1,7 @@
-package net.mine_diver.aethermainmenu.mixin;
+package com.periut.aethermainmenu.mixin;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.mine_diver.aethermainmenu.AetherMenu;
+import com.periut.aethermainmenu.AetherMenu;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;

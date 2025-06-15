@@ -1,6 +1,6 @@
-package net.mine_diver.aethermainmenu.mixin;
+package com.periut.aethermainmenu.mixin;
 
-import net.mine_diver.aethermainmenu.AetherMenu;
+import com.periut.aethermainmenu.AetherMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.Entity;

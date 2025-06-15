@@ -1,4 +1,4 @@
-package net.mine_diver.aethermainmenu.mixin;
+package com.periut.aethermainmenu.mixin;
 
 import net.minecraft.client.sound.SoundManager;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,7 +1,7 @@
-package net.mine_diver.aethermainmenu.mixin;
+package com.periut.aethermainmenu.mixin;
 
-import net.mine_diver.aethermainmenu.AetherButton;
-import net.mine_diver.aethermainmenu.AetherMenu;
+import com.periut.aethermainmenu.AetherButton;
+import com.periut.aethermainmenu.AetherMenu;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;

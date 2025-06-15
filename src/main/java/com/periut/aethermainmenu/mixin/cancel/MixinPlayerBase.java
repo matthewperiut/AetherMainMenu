@@ -1,6 +1,6 @@
-package net.mine_diver.aethermainmenu.mixin.cancel;
+package com.periut.aethermainmenu.mixin.cancel;
 
-import net.mine_diver.aethermainmenu.AetherMenu;
+import com.periut.aethermainmenu.AetherMenu;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

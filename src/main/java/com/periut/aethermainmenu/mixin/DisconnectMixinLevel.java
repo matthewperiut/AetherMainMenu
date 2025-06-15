@@ -1,7 +1,7 @@
-package net.mine_diver.aethermainmenu.mixin;
+package com.periut.aethermainmenu.mixin;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.mine_diver.aethermainmenu.AetherMenu;
+import com.periut.aethermainmenu.AetherMenu;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProperties;
 import org.spongepowered.asm.mixin.Mixin;
