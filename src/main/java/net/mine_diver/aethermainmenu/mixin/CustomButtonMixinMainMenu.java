@@ -4,20 +4,20 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.mine_diver.aethermainmenu.AetherButton;
 import net.mine_diver.aethermainmenu.AetherMenu;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.ScreenBase;
-import net.minecraft.client.gui.screen.menu.MainMenu;
-import net.minecraft.client.gui.widgets.Button;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = MainMenu.class, priority = 1010)
-public class CustomButtonMixinMainMenu extends ScreenBase {
+@Mixin(value = TitleScreen.class, priority = 1010)
+public class CustomButtonMixinMainMenu extends Screen {
     @Inject(at = @At("RETURN"), method = "init")
     public void addMenuButton(CallbackInfo info) {
         AetherMenu.toolTip = "";
-        this.buttons.add(new Button(101, this.width - 25, 5, 20, 20,  "T") {
+        this.buttons.add(new ButtonWidget(101, this.width - 25, 5, 20, 20,  "T") {
             @Override
             public void render(Minecraft minecraft, int i, int j)
             {
@@ -38,7 +38,7 @@ public class CustomButtonMixinMainMenu extends ScreenBase {
                 super.render(minecraft, i, j);
             }
         });
-        this.buttons.add(new Button(102, this.width - 50, 5, 20, 20,  "W") {
+        this.buttons.add(new ButtonWidget(102, this.width - 50, 5, 20, 20,  "W") {
             @Override
             public void render(Minecraft minecraft, int i, int j)
             {
@@ -60,11 +60,11 @@ public class CustomButtonMixinMainMenu extends ScreenBase {
                 super.render(minecraft, i, j);
             }
         });
-        this.buttons.add(new Button(103, this.width - 75, 5, 20, 20,  "P") {
+        this.buttons.add(new ButtonWidget(103, this.width - 75, 5, 20, 20,  "P") {
             @Override
             public void render(Minecraft minecraft, int i, int j)
             {
-                active = visible = AetherMenu.visibleWorldButton && minecraft.level != null;
+                active = visible = AetherMenu.visibleWorldButton && minecraft.world != null;
                 if (active)
                 {
                     boolean var5 = i >= this.x && j >= this.y && i < this.x + this.width && j < this.y + this.height;
@@ -82,11 +82,11 @@ public class CustomButtonMixinMainMenu extends ScreenBase {
                 super.render(minecraft, i, j);
             }
         });
-        this.buttons.add(new Button(104, this.width - 100, 5, 20, 20,  "Q") {
+        this.buttons.add(new ButtonWidget(104, this.width - 100, 5, 20, 20,  "Q") {
             @Override
             public void render(Minecraft minecraft, int i, int j)
             {
-                active = visible = AetherMenu.visibleWorldButton && minecraft.level != null;
+                active = visible = AetherMenu.visibleWorldButton && minecraft.world != null;
                 if (active)
                 {
                     boolean var5 = i >= this.x && j >= this.y && i < this.x + this.width && j < this.y + this.height;
@@ -107,7 +107,7 @@ public class CustomButtonMixinMainMenu extends ScreenBase {
     }
 
     @Inject(method = "buttonClicked", at = @At("HEAD"))
-    private void onActionPerformed(Button button, CallbackInfo ci) {
+    private void onActionPerformed(ButtonWidget button, CallbackInfo ci) {
         if (button.id == 101) {
             AetherMenu.replaceBgTile = !AetherMenu.replaceBgTile;
         }
@@ -132,7 +132,7 @@ public class CustomButtonMixinMainMenu extends ScreenBase {
     @Inject(at = @At("RETURN"), method = "init")
     public void replaceMenuButtons(CallbackInfo info) {
         if (AetherMenu.modmenu) {
-            Button b = (Button) this.buttons.get(4);
+            ButtonWidget b = (ButtonWidget) this.buttons.get(4);
             ButtonAccessor ba = (ButtonAccessor) b;
             AetherButton replacement = new AetherButton(b.id, b.x, b.y, ba.getWidth(), ba.getHeight(), "Mods");
             this.buttons.remove(4);

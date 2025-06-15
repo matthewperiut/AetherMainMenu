@@ -1,11 +1,11 @@
 package net.mine_diver.aethermainmenu.mixin;
 
-import net.minecraft.client.sound.SoundHelper;
+import net.minecraft.client.sound.SoundManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import paulscode.sound.SoundSystem;
 
-@Mixin(SoundHelper.class)
+@Mixin(SoundManager.class)
 public interface AccessorSoundHelper {
 
     @Accessor
