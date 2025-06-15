@@ -132,10 +132,20 @@ public class CustomButtonMixinMainMenu extends Screen {
     @Inject(at = @At("RETURN"), method = "init")
     public void replaceMenuButtons(CallbackInfo info) {
         if (AetherMenu.modmenu) {
-            ButtonWidget b = (ButtonWidget) this.buttons.get(4);
-            ButtonAccessor ba = (ButtonAccessor) b;
-            AetherButton replacement = new AetherButton(b.id, b.x, b.y, ba.getWidth(), ba.getHeight(), "Mods");
-            this.buttons.remove(4);
+            ButtonWidget button = null;
+            for (Object o : buttons) {
+                ButtonWidget b = (ButtonWidget) o;
+                if (b.id == 100) {
+                    button = b;
+                }
+            }
+
+            if (button == null)
+                return;
+
+            ButtonAccessor ba = (ButtonAccessor) button;
+            AetherButton replacement = new AetherButton(button.id, button.x, button.y, ba.getWidth(), ba.getHeight(), button.text);
+            this.buttons.remove(button);
             this.buttons.add(replacement);
         }
     }
