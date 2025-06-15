@@ -55,9 +55,12 @@ public class AetherButton extends ButtonWidget
                     this.width *= 2;
                 }
 
-                if (id == 4)
-                {
+                if (id == 4) {
                     this.width *= 2;
+
+                    if (!AetherMenu.modmenu) {
+                        this.y += 24;
+                    }
                 }
             }
 
@@ -87,8 +90,6 @@ public class AetherButton extends ButtonWidget
                 }
             }
         } else {
-
-
             if (AetherMenu.gambac) {
 
                 if (id == 0)
@@ -98,7 +99,9 @@ public class AetherButton extends ButtonWidget
 
                 if (id == 3)
                 {
-                    this.width *= 2;
+                    if (AetherMenu.modmenu) {
+                        this.width *= 2;
+                    }
                 }
 
                 if (id == 4)
