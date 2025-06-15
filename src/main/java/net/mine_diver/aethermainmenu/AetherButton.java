@@ -1,11 +1,11 @@
 package net.mine_diver.aethermainmenu;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.widgets.Button;
-import net.minecraft.client.render.TextRenderer;
+import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import org.lwjgl.opengl.GL11;
 
-public class AetherButton extends Button
+public class AetherButton extends ButtonWidget
 {
     public AetherButton(int i, int j, int k, String string)
     {
@@ -44,7 +44,7 @@ public class AetherButton extends Button
             return;
         }
         else
-        if (minecraft.level != null)
+        if (minecraft.world != null)
         {
             this.x = 5;
             this.y -= 30;
@@ -78,13 +78,13 @@ public class AetherButton extends Button
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             boolean var5 = i >= this.x && j >= this.y && i < this.x + this.width && j < this.y + this.height;
             int var6 = this.getYImage(var5);
-            this.blit(this.x, this.y, 0, 46 + var6 * 20, this.width / 2, this.height);
-            this.blit(this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + var6 * 20, this.width / 2, this.height);
-            this.postRender(minecraft, i, j);
+            this.drawTexture(this.x, this.y, 0, 46 + var6 * 20, this.width / 2, this.height);
+            this.drawTexture(this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + var6 * 20, this.width / 2, this.height);
+            this.renderBackground(minecraft, i, j);
             if (AetherMenu.replaceBgTile) {
 
                 int offset = 20;
-                if (minecraft.level != null || !AetherMenu.modmenu)
+                if (minecraft.world != null || !AetherMenu.modmenu)
                 {
                     offset = 30;
                 }
@@ -99,11 +99,11 @@ public class AetherButton extends Button
             }
             else {
                 if (!this.active) {
-                    this.drawTextWithShadowCentred(var4, this.text, this.x + this.width / 2, this.y + (this.height - 8) / 2, -6250336);
+                    this.drawCenteredTextWithShadow(var4, this.text, this.x + this.width / 2, this.y + (this.height - 8) / 2, -6250336);
                 } else if (var5) {
-                    this.drawTextWithShadowCentred(var4, this.text, this.x + this.width / 2, this.y + (this.height - 8) / 2, 16777120);
+                    this.drawCenteredTextWithShadow(var4, this.text, this.x + this.width / 2, this.y + (this.height - 8) / 2, 16777120);
                 } else {
-                    this.drawTextWithShadowCentred(var4, this.text, this.x + this.width / 2, this.y + (this.height - 8) / 2, 14737632);
+                    this.drawCenteredTextWithShadow(var4, this.text, this.x + this.width / 2, this.y + (this.height - 8) / 2, 14737632);
                 }
             }
         }

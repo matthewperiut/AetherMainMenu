@@ -3,15 +3,15 @@ package net.mine_diver.aethermainmenu;
 import net.fabricmc.loader.api.FabricLoader;
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.SinglePlayerClientInteractionManager;
-import net.minecraft.client.gui.screen.menu.MainMenu;
-import net.minecraft.level.storage.LevelMetadata;
-import net.minecraft.level.storage.LevelStorage;
+import net.minecraft.client.SingleplayerInteractionManager;
+import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraft.world.storage.WorldSaveInfo;
+import net.minecraft.world.storage.WorldStorageSource;
 import net.modificationstation.stationapi.api.event.mod.InitEvent;
 import net.modificationstation.stationapi.api.mod.entrypoint.Entrypoint;
 import net.modificationstation.stationapi.api.mod.entrypoint.EventBusPolicy;
-import net.modificationstation.stationapi.api.registry.Identifier;
-import net.modificationstation.stationapi.api.registry.ModID;
+import net.modificationstation.stationapi.api.util.Identifier;
+import net.modificationstation.stationapi.api.util.Namespace;
 import net.modificationstation.stationapi.api.util.Null;
 import org.apache.logging.log4j.Logger;
 
@@ -23,13 +23,12 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Random;
 
-import static net.modificationstation.stationapi.api.registry.Identifier.of;
-
 @Entrypoint(eventBus = @EventBusPolicy(registerInstance = false))
 public class AetherMenu {
 
-    @Entrypoint.ModID
-    public static final ModID MODID = Null.get();
+    //public static final Namespace NAMESPACE = Namespace.resolve();
+    @Entrypoint.Namespace
+    public static Namespace MODID = Null.get();
 
     @Entrypoint.Logger
     public static final Logger LOGGER = Null.get();
@@ -58,7 +57,7 @@ public class AetherMenu {
         if (FabricLoader.getInstance().isModLoaded("modmenu"))
             modmenu = true;
 
-        modular = of(MODID, "mainmenu.aether");
+        modular = Identifier.of(MODID, "mainmenu.aether");
 
         CreateConfigFolder();
         AttemptLoadingSettings();
@@ -149,8 +148,8 @@ public class AetherMenu {
 
     public static void LoadWorld(Minecraft minecraft) {
         List worlds;
-        LevelStorage var1 = minecraft.getLevelStorage();
-        worlds = var1.getMetadata();
+        WorldStorageSource var1 = minecraft.getWorldStorageSource();
+        worlds = var1.getAll();
 
         // Check if there are worlds to load
         if (worlds.size() > 0)
@@ -167,7 +166,7 @@ public class AetherMenu {
         {
             for (Object world : worlds)
             {
-                if (((LevelMetadata)world).getLevelName().equals(lastLevel))
+                if (((WorldSaveInfo)world).getName().equals(lastLevel))
                 {
                     found = true;
                     break;
@@ -177,31 +176,31 @@ public class AetherMenu {
 
         // Load a world if previous world not found
         if (!found)
-            lastLevel = ((LevelMetadata)worlds.get(0)).getFileName();
+            lastLevel = ((WorldSaveInfo)worlds.get(0)).getSaveName();
 
-        if (minecraft.level == null && shouldWorldLoad)
+        if (minecraft.world == null && shouldWorldLoad)
         {
-            minecraft.interactionManager = new SinglePlayerClientInteractionManager(minecraft);
+            minecraft.interactionManager = new SingleplayerInteractionManager(minecraft);
 
             if(lastLevel != null)
             {
-                minecraft.interactionManager = new SinglePlayerClientInteractionManager(minecraft);
+                minecraft.interactionManager = new SingleplayerInteractionManager(minecraft);
                 String name = lastLevel;//((LevelMetadata)worlds.get(0)).getFileName();
-                minecraft.createOrLoadWorld(name, name, new Random().nextLong());
+                minecraft.startGame(name, name, new Random().nextLong());
             }
         }
     }
 
     public static void quickLoad(Minecraft minecraft)
     {
-        minecraft.openScreen(null);
-        minecraft.interactionManager = new SinglePlayerClientInteractionManager(minecraft);
-        minecraft.viewEntity = minecraft.player;
+        minecraft.setScreen(null);
+        minecraft.interactionManager = new SingleplayerInteractionManager(minecraft);
+        minecraft.camera = minecraft.player;
     }
 
     public static void startOrStopMenuWorld(Minecraft minecraft)
     {
-        if (minecraft.level == null)
+        if (minecraft.world == null)
         {
             // loading
             needsPlayerCreation = true;
@@ -212,14 +211,14 @@ public class AetherMenu {
         {
             // quitting
             shouldWorldLoad = false;
-            if (minecraft.hasLevel())
+            if (minecraft.isWorldRemote())
             {
 
-                minecraft.level.disconnect();
+                minecraft.world.disconnect();
             }
 
-            minecraft.setLevel(null);
-            minecraft.openScreen(new MainMenu());
+            minecraft.setWorld(null);
+            minecraft.setScreen(new TitleScreen());
         }
     }
 }
