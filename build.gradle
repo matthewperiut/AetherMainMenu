@@ -16,6 +16,10 @@ loom {
 	intermediaryUrl.set("https://maven.glass-launcher.net/babric/babric/intermediary/%1\$s/intermediary-%1\$s-v2.jar")
 }
 
+//babric {
+//	disableM1Fixes.set(true) // Disable Gambáč
+//}
+
 repositories {
 	// Add repositories to retrieve artifacts from in here.
 	// You should only use this when depending on other mods because

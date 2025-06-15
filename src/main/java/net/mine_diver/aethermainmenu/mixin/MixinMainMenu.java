@@ -27,7 +27,7 @@ public class MixinMainMenu extends Screen {
         int id = button.id;
         ButtonAccessor b = (ButtonAccessor) button;
 
-        return instance.add(new AetherButton(id, button.x, button.y, button.text));
+        return instance.add(new AetherButton(id, button.x, button.y, ((ButtonAccessor) button).getWidth(), ((ButtonAccessor) button).getHeight(), button.text));
     }
 
     @Inject(method = "init()V", at = @At("TAIL"))
