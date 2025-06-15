@@ -65,14 +65,14 @@ public class AetherButton extends ButtonWidget
             {
                 if (id == 100)
                 {
-                    this.y += 25;
+                    this.y += 24;
                     this.width *= 2;
                     this.width += 2; // annoying but due to original being odd
                 }
 
                 if (id == 0)
                 {
-                    this.y += 13;
+                    this.y += 12;
                 }
 
                 if (id == 3)
@@ -83,7 +83,7 @@ public class AetherButton extends ButtonWidget
 
                 if (id == 4)
                 {
-                    this.y += 38;
+                    this.y += 36;
                 }
             }
         } else {
