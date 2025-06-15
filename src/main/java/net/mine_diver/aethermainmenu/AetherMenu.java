@@ -38,6 +38,7 @@ public class AetherMenu {
 
     // Utility fields
     public static boolean modmenu;
+    public static boolean gambac;
     public static boolean captureSoundId;
     public static String musicId;
     public static long musicStartTimestamp;
@@ -56,6 +57,9 @@ public class AetherMenu {
     {
         if (FabricLoader.getInstance().isModLoaded("modmenu"))
             modmenu = true;
+
+        if (FabricLoader.getInstance().isModLoaded("gambac"))
+            gambac = true;
 
         modular = Identifier.of(MODID, "mainmenu.aether");
 
