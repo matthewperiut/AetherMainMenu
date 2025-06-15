@@ -26,12 +26,12 @@ import java.util.Random;
 @Entrypoint(eventBus = @EventBusPolicy(registerInstance = false))
 public class AetherMenu {
 
-    //public static final Namespace NAMESPACE = Namespace.resolve();
+    //public static final Namespace MODID = Namespace.resolve();
     @Entrypoint.Namespace
     public static Namespace MODID = Null.get();
 
-    @Entrypoint.Logger
-    public static final Logger LOGGER = Null.get();
+//    @Entrypoint.Logger
+//    public static final Logger LOGGER = Null.get();
 
     // Identifiers
     public static Identifier modular;
@@ -52,7 +52,7 @@ public class AetherMenu {
     public static String toolTip = "HELLO";
 
     @EventListener
-    private static void init(InitEvent event)
+    public static void init(InitEvent event)
     {
         if (FabricLoader.getInstance().isModLoaded("modmenu"))
             modmenu = true;
@@ -118,12 +118,12 @@ public class AetherMenu {
                     if (line.length() < 2)
                         continue;
 
-                    switch (line.charAt(0)) {
-                        case 'P' -> renderPlayer = line.charAt(2) == 't';
-                        case 'W' -> shouldWorldLoad = line.charAt(2) == 't';
-                        case 'T' -> replaceBgTile = line.charAt(2) == 't';
-                        default -> { LOGGER.log(org.apache.logging.log4j.Level.WARN, "Invalid line in \".minecraft/config/aether/settings.txt\":\n" + line); }
-                    }
+//                    switch (line.charAt(0)) {
+//                        case 'P' -> renderPlayer = line.charAt(2) == 't';
+//                        case 'W' -> shouldWorldLoad = line.charAt(2) == 't';
+//                        case 'T' -> replaceBgTile = line.charAt(2) == 't';
+//                        default -> { LOGGER.log(org.apache.logging.log4j.Level.WARN, "Invalid line in \".minecraft/config/aether/settings.txt\":\n" + line); }
+//                    }
                 }
             } catch (IOException e) {
                 shouldWorldLoad = false;
