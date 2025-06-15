@@ -76,6 +76,10 @@ public class AetherButton extends ButtonWidget
                 if (id == 0)
                 {
                     this.y += 12;
+
+                    if (!AetherMenu.gambac) {
+                        this.y += 12;
+                    }
                 }
 
                 if (id == 3)
@@ -90,30 +94,30 @@ public class AetherButton extends ButtonWidget
                 }
             }
         } else {
-            if (AetherMenu.gambac) {
-
-                if (id == 0)
-                {
-                    this.width *= 2;
-                }
-
-                if (id == 3)
-                {
-                    if (AetherMenu.modmenu) {
-                        this.width *= 2;
-                    }
-                }
-
-                if (id == 4)
-                {
-                    this.width *= 2;
-                }
-
-                if (id == 100)
-                {
-                    this.width *= 2;
-                }
-            }
+//            if (AetherMenu.gambac) {
+//
+//                if (id == 0)
+//                {
+//                    this.width *= 2;
+//                }
+//
+//                if (id == 3)
+//                {
+//                    if (AetherMenu.modmenu) {
+//                        this.width *= 2;
+//                    }
+//                }
+//
+//                if (id == 4)
+//                {
+//                    this.width *= 2;
+//                }
+//
+//                if (id == 100)
+//                {
+//                    this.width *= 2;
+//                }
+//            }
         }
 
         if (this.visible) {
