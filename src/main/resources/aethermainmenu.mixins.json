@@ -17,6 +17,7 @@
     "DeleteLoadedWorldMixinSelectWorld",
     "MixinMainMenu",
     "MixinMinecraft",
+    "MixinMultiplayerScreen",
     "MixinScreenBase",
     "MixinSoundHelper",
     "cancel.Mixinclass_556",

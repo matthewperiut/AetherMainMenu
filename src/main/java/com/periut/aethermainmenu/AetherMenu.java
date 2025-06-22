@@ -108,10 +108,10 @@ public class AetherMenu {
     {
         String filePath = FabricLoader.getInstance().getConfigDir().toString() + "/aether/settings.txt";
         File file = new File(filePath);
+        SaveCurrentSettings();
 
         // Check if the file exists
         if (!file.exists()) {
-            SaveCurrentSettings();
         }
         else
         {

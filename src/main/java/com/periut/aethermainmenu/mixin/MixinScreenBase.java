@@ -35,7 +35,7 @@ public abstract class MixinScreenBase extends DrawContext {
     @Redirect(method = "renderBackgroundTexture", at = @At(value = "INVOKE", target="Lorg/lwjgl/opengl/GL11;glBindTexture(II)V"), require = 0)
     public void BindCustomTexture(int bind_to, int texture)
     {
-        if (AetherMenu.replaceBgTile && ((ButtonWidget)buttons.get(1)).id == 2)
+        if (AetherMenu.replaceBgTile && buttons.size() > 1 && ((ButtonWidget)buttons.get(1)).id == 2)
             GL11.glBindTexture(3553, minecraft.textureManager.getTextureId("aethermainmenu:textures/gui/aetherBG.png"));
         else
             GL11.glBindTexture(3553, minecraft.textureManager.getTextureId("/gui/background.png")); // vanilla
@@ -50,7 +50,7 @@ public abstract class MixinScreenBase extends DrawContext {
         }
         else
         {
-            if ((AetherMenu.replaceBgTile && ((ButtonWidget)buttons.get(1)).id == 2)) // has singleplayer button
+            if ((AetherMenu.replaceBgTile && buttons.size() > 1 && ((ButtonWidget)buttons.get(1)).id == 2)) // has singleplayer button
                 instance.color(10066329); // aether
             else
                 instance.color(4210752); // vanilla

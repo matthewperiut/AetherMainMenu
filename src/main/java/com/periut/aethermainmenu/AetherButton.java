@@ -92,6 +92,13 @@ public class AetherButton extends ButtonWidget
                 {
                     this.y += 36;
                 }
+            } else {
+                if (id == 0) {
+                    this.y -= 12;
+                }
+                if (id == 4) {
+                    this.y -= 12;
+                }
             }
         } else {
 //            if (AetherMenu.gambac) {

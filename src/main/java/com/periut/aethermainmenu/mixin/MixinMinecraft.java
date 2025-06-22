@@ -40,6 +40,9 @@ public class MixinMinecraft {
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/Screen;tick()V", shift = At.Shift.AFTER))
     private void tick(CallbackInfo ci) {
         // "ticksPlayed" is available to use
+        if (!AetherMenu.shouldWorldLoad) {
+            return;
+        }
 
         if (AetherMenu.musicId != null)
         {
