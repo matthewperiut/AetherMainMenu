@@ -16,6 +16,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class CustomButtonMixinMainMenu extends Screen {
     @Inject(at = @At("RETURN"), method = "init")
     public void addMenuButton(CallbackInfo info) {
+        if (AetherMenu.hideSettingsButton) {
+            return;
+        }
         AetherMenu.toolTip = "";
         this.buttons.add(new ButtonWidget(101, this.width - 25, 5, 20, 20,  "T") {
             @Override

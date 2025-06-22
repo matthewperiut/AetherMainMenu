@@ -46,11 +46,12 @@ public class AetherMenu {
     public static boolean shouldWorldLoad = true;
     public static boolean replaceBgTile = true;
     public static boolean renderPlayer = true;
+    public static boolean hideSettingsButton = false;
 
     public static boolean visibleWorldButton = false;
 
     public static String lastLevel;
-    public static String toolTip = "HELLO";
+    public static String toolTip = "";
 
     @EventListener
     public static void init(InitEvent event)
@@ -66,6 +67,7 @@ public class AetherMenu {
         CreateConfigFolder();
         AttemptLoadingSettings();
         AttemptLoadingLastLevel();
+        AttemptLoadingConfig();
     }
 
     private static void CreateConfigFolder()
@@ -84,19 +86,12 @@ public class AetherMenu {
         try {
             File file = new File(filePath);
             String fileContent  = "P " + renderPlayer + "\nW " + shouldWorldLoad + "\nT " + replaceBgTile;
-            // Create directories recursively if needed
-            boolean file_access = true;
-            if (!file.exists()) {
-                file_access = file.delete();
-            }
-            if (file_access)
-            {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-                FileWriter writer = new FileWriter(file);
-                writer.write(fileContent);
-                writer.close();
-            }
+            
+            file.getParentFile().mkdirs();
+            
+            FileWriter writer = new FileWriter(file);
+            writer.write(fileContent);
+            writer.close();
         }
         catch (Exception e)
         {
@@ -108,12 +103,9 @@ public class AetherMenu {
     {
         String filePath = FabricLoader.getInstance().getConfigDir().toString() + "/aether/settings.txt";
         File file = new File(filePath);
-        SaveCurrentSettings();
 
-        // Check if the file exists
-        if (!file.exists()) {
-        }
-        else
+        // Check if the file exists and read it first
+        if (file.exists())
         {
             try {
                 List<String> lines = Files.readAllLines(Path.of(filePath));
@@ -122,18 +114,48 @@ public class AetherMenu {
                     if (line.length() < 2)
                         continue;
 
-//                    switch (line.charAt(0)) {
-//                        case 'P' -> renderPlayer = line.charAt(2) == 't';
-//                        case 'W' -> shouldWorldLoad = line.charAt(2) == 't';
-//                        case 'T' -> replaceBgTile = line.charAt(2) == 't';
-//                        default -> { LOGGER.log(org.apache.logging.log4j.Level.WARN, "Invalid line in \".minecraft/config/aether/settings.txt\":\n" + line); }
-//                    }
+                    switch (line.charAt(0)) {
+                        case 'P':
+                            renderPlayer = line.charAt(2) == 't';
+                            break;
+                        case 'W':
+                            shouldWorldLoad = line.charAt(2) == 't';
+                            break;
+                        case 'T':
+                            replaceBgTile = line.charAt(2) == 't';
+                            break;
+                        default:
+                            System.out.println("Invalid line in settings.txt: " + line);
+                            break;
+                    }
                 }
             } catch (IOException e) {
                 shouldWorldLoad = false;
             }
         }
+        else
+        {
+            // File doesn't exist, create it with current settings
+            SaveCurrentSettings();
+        }
+    }
 
+    public static void SaveLastLevel()
+    {
+        String filePath = FabricLoader.getInstance().getConfigDir().toString() + "/aether/lastsave.txt";
+        try {
+            File file = new File(filePath);
+            
+            file.getParentFile().mkdirs();
+            
+            FileWriter writer = new FileWriter(file);
+            writer.write(lastLevel != null ? lastLevel : "");
+            writer.close();
+        }
+        catch (Exception e)
+        {
+            System.out.println("An error occurred saving last level: " + e.getMessage());
+        }
     }
 
     public static void AttemptLoadingLastLevel()
@@ -147,6 +169,49 @@ public class AetherMenu {
             }
         } catch (IOException e) {
             shouldWorldLoad = false;
+        }
+    }
+
+    public static void SaveConfig()
+    {
+        String filePath = FabricLoader.getInstance().getConfigDir().toString() + "/aether/config.txt";
+        try {
+            File file = new File(filePath);
+            String fileContent = "HideSettingsButton " + hideSettingsButton;
+            
+            file.getParentFile().mkdirs();
+            
+            FileWriter writer = new FileWriter(file);
+            writer.write(fileContent);
+            writer.close();
+        }
+        catch (Exception e)
+        {
+            System.out.println("An error occurred saving config: " + e.getMessage());
+        }
+    }
+
+    private static void AttemptLoadingConfig()
+    {
+        String filePath = FabricLoader.getInstance().getConfigDir().toString() + "/aether/config.txt";
+        File file = new File(filePath);
+
+        if (file.exists())
+        {
+            try {
+                List<String> lines = Files.readAllLines(Path.of(filePath));
+                for (String line : lines) {
+                    if (line.startsWith("HideSettingsButton ")) {
+                        hideSettingsButton = line.substring("HideSettingsButton ".length()).equals("true");
+                    }
+                }
+            } catch (IOException e) {
+                System.out.println("Error reading config file: " + e.getMessage());
+            }
+        }
+        else
+        {
+            SaveConfig();
         }
     }
 
@@ -180,7 +245,10 @@ public class AetherMenu {
 
         // Load a world if previous world not found
         if (!found)
+        {
             lastLevel = ((WorldSaveInfo)worlds.get(0)).getSaveName();
+            SaveLastLevel();
+        }
 
         if (minecraft.world == null && shouldWorldLoad)
         {
@@ -191,6 +259,7 @@ public class AetherMenu {
                 minecraft.interactionManager = new SingleplayerInteractionManager(minecraft);
                 String name = lastLevel;//((LevelMetadata)worlds.get(0)).getFileName();
                 minecraft.startGame(name, name, new Random().nextLong());
+                SaveLastLevel();
             }
         }
     }
